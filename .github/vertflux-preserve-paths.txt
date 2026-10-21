@@ -1,0 +1,5 @@
+.github
+deploy/vertflux-gateway
+deploy/vertflux-worker.jsonc
+docs/vertflux-deployment.md
+public/tools-settings.json

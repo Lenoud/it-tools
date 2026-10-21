@@ -1,0 +1,56 @@
+name: Vertflux 构建检查与部署
+
+on:
+  push:
+    branches: ["chore/all-my-stuffs"]
+  pull_request:
+    branches: ["chore/all-my-stuffs"]
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: '检查通过后部署到现有 Cloudflare 项目（仅生产分支有效）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vertflux-cloudflare-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: 构建与检查
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CI: 'true'
+      HUSKY: '0'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: 安装 pnpm
+        run: |
+          npm install --global pnpm@11.11.0
+      - name: 安装依赖
+        run: |
+          pnpm install --frozen-lockfile
+      - name: 构建工具箱
+        run: |
+          pnpm build
+      - name: 部署工具箱
+        if: github.ref == 'refs/heads/chore/all-my-stuffs' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bf8566234d0f57c2451986e3cdcb01c4
+        run: |
+          pnpm dlx wrangler@4.151.2 pages deploy dist --project-name vertflux-tools --branch main --commit-hash "$GITHUB_SHA"
+      - name: 验证生产入口
+        if: github.ref == 'refs/heads/chore/all-my-stuffs' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
+        run: curl --fail --silent --show-error --location --retry 5 --retry-delay 3 --max-time 45 https://tools.vertflux.com/ --output /dev/null
