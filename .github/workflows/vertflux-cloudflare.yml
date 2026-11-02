@@ -44,6 +44,7 @@ jobs:
       - name: 构建工具箱
         run: |
           pnpm build
+          node .github/scripts/vertflux-offload-large-assets.mjs dist
       - name: 部署工具箱
         if: github.ref == 'refs/heads/chore/all-my-stuffs' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy))
         env:
