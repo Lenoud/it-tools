@@ -4311,6 +4311,7 @@ tools:
       label-permanent: Permanent
       title-generated-fw-command: "Generated fw command:"
       tag-const-zone-ref: const zone = ref
+      tooltip-remove: Remove from this list
   fortune-wheel:
     title: Fortune wheel
     description: A configurable fortune wheel
@@ -4326,6 +4327,11 @@ tools:
       tag-clear-all-options: Clear All Options
       tag-no-options-added-yet-add-some-options-to-start-spinning: No options added yet. Add some options to start spinning!
       tag-: ✕
+      wheel-options-wheeloptions-length: Wheel Options ({0})
+      spinning: Spinning...
+      spin-to-win: Spin to Win!
+      spin-the-wheel: Spin the Wheel!
+      checkbox-remove-winner-after-spin: Remove winner after spin
   fstab-generator:
     title: FStab Generator
     description: Generate /etc/fstab line
@@ -4997,6 +5003,11 @@ tools:
       label-azerty: AZERTY
       label-dvorak: DVORAK
       label-colemak: COLEMAK
+    title: Keyboard Tester
+    description: Test your keyboard keys and check if all keys are working properly.
+      Visual feedback for each key press with support for different keyboard
+      layouts.
+    externalAccess: "null"
   text-to-binary:
     title: Text to UTF-8 binary
     description: Convert text to its UTF-8 binary representation and vice-versa.
@@ -5177,6 +5188,7 @@ tools:
           RAID 0 splits data evenly across 2 or more disks without redunancy or
           fault tolerance creating one large storage space.
   categories:
+    automation: Automation
     favorite-tools: Your favorite tools
     crypto: Crypto
     converter: Converter
@@ -5207,6 +5219,37 @@ tools:
     finance: Finance
     default: Default
     toml: TOML
+  current-loop-4-20ma-converter:
+    title: 4-20 mA converter
+    description: Convert a 4-20 mA (or 0-20 mA) current into an engineering value
+      and back, with NAMUR NE 43 loop diagnostic.
+    texts:
+      signal-label: Current
+      label-4-20-ma: 4-20 mA
+      label-0-20-ma: 0-20 mA
+  voltage-0-10v-converter:
+    title: 0-10 V converter
+    description: Convert a 0-10 V, 2-10 V, 0-5 V, 1-5 V or ±10 V voltage into an
+      engineering value and back.
+    texts:
+      signal-label: Voltage
+      label-0-10-v: 0-10 V
+      label-2-10-v: 2-10 V
+      label-0-5-v: 0-5 V
+      label-1-5-v: 1-5 V
+      label-10-v: ±10 V
+  analog-scaling-calculator:
+    title: Analog scaling calculator
+    description: Scale a raw PLC analog value (Siemens 0-27648, Schneider 0-10000,
+      12/15/16 bits...) into an engineering value and back.
+    texts:
+      signal-label: Raw value
+      preset-siemens-unipolar: Siemens S7 unipolar (0 to 27648)
+      preset-siemens-bipolar: Siemens S7 bipolar (-27648 to 27648)
+      preset-schneider: Schneider M340/M580 (0 to 10000)
+      preset-12-bits: 12 bits (0 to 4095)
+      preset-15-bits: 15 bits (0 to 32767)
+      preset-16-bits: 16 bits (0 to 65535)
   websocket-tester:
     title: Websocket tester
     description: Allows to test WebSocket connections
@@ -9793,6 +9836,10 @@ tools:
       tag-copy-json-paths: Copy JSON paths
       tag-generate-patch: Generate patch
       tag-apply-patch: Apply patch
+    title: Json Patch Tester
+    description: A simple tool for creating and testing JSON patches according to
+      RFC 6902. And list paths of a JSON object.
+    externalAccess: "null"
   ping:
     title: Ping
     description: Ping a set of hostname, IPs, CIDR or IP range
@@ -10108,6 +10155,137 @@ tools:
     description: Test your speakers and headphones by playing test sounds. Adjust
       volume and check for audio clarity.
     externalAccess: "null"
+  paste-image:
+    texts:
+      copy-image: Copy image
+      copy-as-base64: Copy as base64
+      getoutputextension-image: .{0}
+      your-browser-cannot-encode-outputformats-image-outputformat-label-the-image-downloads-as-gettypelabel-image-output-type: Your browser cannot encode {0}. The image downloads as {1}.
+      formatsizedelta-originalsize-image-source-size-outputsize-image-output-size: ({0})
+      output-gettypelabel-image-output-type-formatbytes-image-output-size: "Output: {0}, {1}"
+      original-gettypelabel-image-source-type-formatbytes-image-source-size: "Original: {0}, {1}"
+      image-width-image-height-px: "{0} × {1} px"
+      clear-all: Clear all
+      images-length-images-length-1-image-images-pasted-in-this-session: "{0} {1} pasted in this session"
+      quality: "{0}%"
+      paste-from-clipboard: Paste from clipboard
+      the-image-stays-in-your-browser-nothing-is-uploaded: The image stays in your browser. Nothing is uploaded.
+      anywhere-on-this-page-to-paste-an-image: anywhere on this page to paste an image.
+      press: Press
+      the-browser-could-not-copy-the-base64-data-url-to-the-clipboard: The browser could not copy the base64 data URL to the clipboard.
+      base64-data-url-copied-to-the-clipboard: Base64 data URL copied to the clipboard
+      the-browser-could-not-copy-the-image-to-the-clipboard: The browser could not copy the image to the clipboard.
+      image-copied-to-the-clipboard: Image copied to the clipboard
+      the-browser-could-not-read-the-clipboard: The browser could not read the clipboard.
+      the-browser-blocked-clipboard-access-allow-it-in-the-site-settings-or-press-pasteshortcut:
+        The browser blocked clipboard access. Allow it in the site settings, or
+        press {0}.
+      your-browser-cannot-read-images-from-the-clipboard-with-a-button-press-pasteshortcut-instead:
+        Your browser cannot read images from the clipboard with a button. Press
+        {0} instead.
+      the-browser-could-not-read-the-pasted-image: The browser could not read the pasted image.
+      the-browser-could-not-convert-the-image: The browser could not convert the image.
+      the-clipboard-has-no-image-copy-an-image-then-try-again: The clipboard has no image. Copy an image, then try again.
+      ctrl-v: Ctrl + V
+      v: ⌘ + V
+    title: Paste Image
+    description: Paste an image from your clipboard, convert it to PNG, JPEG, or
+      WebP, and download it.
+    externalAccess: "null"
+  whitespace-cleaner:
+    options:
+      texts:
+        convert-crlf-lf: Convert CRLF → LF
+        lf-endings: LF endings
+        left-trim-lines-and-rejoin-paragraphs-for-reddit-discord-slack: Left-trim lines and rejoin paragraphs for Reddit, Discord, Slack
+        markdown-reddit: Markdown / Reddit
+        join-soft-wrapped-paragraphs: Join soft-wrapped paragraphs
+        smart-unwrap: Smart unwrap
+        strip-from-patches: Strip + - {'@'}{'@'} from patches
+        diff-markers: Diff markers
+        remove-common-leading-indent: Remove common leading indent
+        indent: Indent
+        collapse-2-blank-lines-into-1: Collapse 2+ blank lines into 1
+        blank-lines: Blank lines
+        remove-end-of-line-whitespace: Remove end-of-line whitespace
+        trailing-space: Trailing space
+        strip-prefixes: Strip ●, ○, ⏺ prefixes
+        bullet-markers: Bullet markers
+        remove-characters: Remove ─ │ └ ┐ characters
+        box-drawing: Box drawing
+        strip-color-escape-sequences: Strip color escape sequences
+        ansi-codes: ANSI codes
+        strip-1-2-1-t-prefixes: Strip 1│, 2│, 1\\t prefixes
+        line-numbers: Line numbers
+    texts:
+      cleaning-options: Cleaning options
+      ctrl-a-ctrl-c: ⌘/Ctrl+A · Ctrl+C
+      your-cleaned-output-will-appear-here: Your cleaned output will appear here.
+      paste-fragmented-claude-code-output-here: Paste fragmented Claude Code output here…
+      sample: Sample
+      paste: Paste
+      copy-failed-the-output-is-selected-press-ctrl-c-to-copy-it: Copy failed. The output is selected. Press Ctrl+C to copy it.
+      copied-to-the-clipboard: Copied to the clipboard.
+      the-clipboard-api-is-unavailable: The Clipboard API is unavailable.
+      copy-failed: Copy failed
+      copied: Copied ✓
+      stats-value-outputlines-lines-stats-value-outputchars-chars-stats-value-savedpercent: "{0} lines · {1} chars · −{2}%"
+      stats-value-inputlines-lines-stats-value-inputchars-chars: "{0} lines · {1} chars"
+    title: Whitespace Cleaner
+    description: "Clean terminal and Claude Code output: strip line numbers, ANSI
+      codes, box drawing, bullet markers, diff markers, and extra whitespace."
+    externalAccess: "null"
+  cli-banner-generator:
+    title: CLI Banner Generator
+    description: Generate ASCII banners, Message of the Day (MOTD) for your CLI
+      applications, terminal or router.
+    externalAccess: "null"
+    texts:
+      label-border-char: "Border Char:"
+      placeholder-: "#"
+      label-width-min-20-max-200: "Width (Min 20 – Max 200):"
+      label-banner-text: "Banner Text:"
+      placeholder-enter-motd-banner-text-here: Enter MOTD banner text here...
+      title-generated-banner: Generated Banner
+analogSignalConverter:
+  texts:
+    title-input: Input
+    title-parameters: Parameters
+    title-output: Output
+    swap-direction: Swap direction
+    status-ok: In range
+    copy-output: Copy the output value
+    title-reference-points: Reference points
+    label-signal-type: Signal type
+    preset-custom: Custom
+    label-engineering-range: Engineering min / max
+    label-engineering-unit: Engineering unit
+    placeholder-unit: Unit
+    error-signal-range: The signal min must be lower than the signal max.
+    error-engineering-range: The engineering min must be lower than the engineering max.
+    label-engineering-value: Engineering value
+    label-rounded-signal: Rounded (integer)
+    status-below-range: The signal is below the range.
+    status-above-range: The signal is above the range.
+    status-below-live-zero: The signal is below the live zero, check for a broken
+      wire or a faulty sensor.
+    engineering-below-range: The value is below the engineering range, the signal will be out of range.
+    engineering-above-range: The value is above the engineering range, the signal will be out of range.
+    loop-status-failure-low: "Low failure (≤ 3.6 mA, NAMUR NE 43): broken loop,
+      unpowered or faulty transmitter."
+    loop-status-uncertain-low: "Between 3.6 and 3.8 mA: undefined zone, a failure is
+      likely (NAMUR NE 43)."
+    loop-status-under-range: "Under-range (3.8 to 4 mA): the measurement is
+      saturated at the bottom of the range."
+    loop-status-over-range: "Over-range (20 to 20.5 mA): the measurement is
+      saturated at the top of the range."
+    loop-status-uncertain-high: "Between 20.5 and 21 mA: undefined zone, a failure
+      is likely (NAMUR NE 43)."
+    loop-status-failure-high: "High failure (≥ 21 mA, NAMUR NE 43): faulty transmitter or short circuit."
+    label-formula: Formula
+    formula-value: value
+    formula-signal: signal
+    column-percent: Range
 collapsibleToolMenu:
   text:
     expanding: Expanding...
